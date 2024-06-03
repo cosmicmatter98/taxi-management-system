@@ -56,7 +56,7 @@ def main():
                 print("A discount of", discount, "INR has been applied to the taxi fare")               # declaration of discount amount
             else:
                 customers.append(customer_name)                                                         # adding the customer to the customers list, if new
-                print("Welcome to the Taxi Service")                                         # welcome message for new customers
+                print("Welcome to the Taxi Service")                                                    # welcome message for new customers
                 discount = 0                                                                            # zero discount for new customers
 
             total_cost = round(basic_fee + distance_fee - discount)                                     # calculating total cost for the customer
