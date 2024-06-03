@@ -56,7 +56,7 @@ def main():
                 print("A discount of", discount, "INR has been applied to the taxi fare")               # declaration of discount amount
             else:
                 customers.append(customer_name)                                                         # adding the customer to the customers list, if new
-                print("Welcome to the Suvradri's Taxi Service")                                         # welcome message for new customers
+                print("Welcome to the Taxi Service")                                         # welcome message for new customers
                 discount = 0                                                                            # zero discount for new customers
 
             total_cost = round(basic_fee + distance_fee - discount)                                     # calculating total cost for the customer
@@ -78,6 +78,7 @@ def main():
                 print(i)
 
         elif menu == 4:                                                                                 # display existing locations
+            print("Locations that the cab has went to already.")
             for i in locations:
                 print(i)
 
@@ -138,23 +139,29 @@ def f_rate(menu):                                                               
             try:                                                                                        # except bloc to restrict options to only one of the three
                 option = int(input("Choose an option: "))                                               # ask for option
                 if option == 1:                                                                         # decision route for updation of existing rate
-                    rate_input = input("Enter the rate type you want to update. ").strip().lower()      # ask for the rate type to update
-                    if rate_input in list(rate_chart):                                                  # checking if rate type in rate chart
-                        while True:                                                                     # reprompting loop
-                            try:                                                                        # exception bloc to validate entered rate is float
-                                updated_rate = float(input("Enter updated rate. "))                     # ask for updated value
-                            except ValueError:                                                          # handling error if non-floatable input is given
-                                print("Enter only the updated rate.")
-                            else:                                                                       # update rate type with the new value and break
-                                rate_chart[rate_input] = updated_rate
-                                break
-                    else:                                                                               # if rate type not in rate chart raise an error
-                        raise ValueError
+                    while True:
+                        try:
+                            rate_input = input("Enter the rate type you want to update. ").strip().lower()      # ask for the rate type to update
+                            if rate_input in list(rate_chart):                                                  # checking if rate type in rate chart
+                                while True:                                                                     # reprompting loop
+                                    try:                                                                        # exception bloc to validate entered rate is float
+                                        updated_rate = float(input("Enter updated rate. "))                     # ask for updated value
+                                    except ValueError:                                                          # handling error if non-floatable input is given
+                                        print("Enter only the updated rate.")
+                                    else:                                                                       # update rate type with the new value and break
+                                        rate_chart[rate_input] = updated_rate
+                                        break
+                            else:                                                                               # if rate type not in rate chart raise an error
+                                raise ValueError
+                        except ValueError:
+                            print("Enter one of the already existing rates")
+                        else:
+                            break
                 elif option == 2:                                                                       # decision route for addition to rate
                     new_type = input("Enter new rate type. ")                                           # asking for new rate type
                     while True:                                                                         # reprompting loop
                         try:                                                                            # exception bloc to validate entered rate is float
-                            new_rate = float(input("Enter the new rate. ")).strip().lower()             # ask for value of new rate type
+                            new_rate = float(input("Enter the new rate. "))                             # ask for value of new rate type
                         except ValueError:                                                              # handling error if non-floatable input is given
                             print("Enter a valid rate only. ")
                         else:                                                                           # update rate chart with new type and value and break
@@ -163,7 +170,7 @@ def f_rate(menu):                                                               
                 elif option == 3:                                                                       # decision route for exiting rate menu by break
                     break
                 else:                                                                                   # raise error when any other thing is entered in option prompt
-                    raise ValueError
+                    raise ValueError("Enter one of the three options only. ")
             except ValueError:                                                                          # handling error at options prompt at rate menu
                 print("Enter one of the three options only. ")
             else:                                                                                       # breaking the loop when all things are done
@@ -197,7 +204,7 @@ def receipt(name, dep, dest, r, d, b, distfee, dis, total):                     
 
 
 def f_menu():                                                                                           # function to display menu when code runs
-    print("Welcome to Suvradri's Taxi Management System")
+    print("Welcome to Taxi Management System")
     print()
     print("#######################################################")
     print("You can choose from the following options:")
